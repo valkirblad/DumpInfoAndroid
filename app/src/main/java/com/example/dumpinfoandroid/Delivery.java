@@ -24,12 +24,12 @@ public class Delivery {
                     if (response.body() != null) {
                         serverCallback.onServerResponse(response.body().toString());
                     } else {
-                        serverCallback.onServerResponse("");
+                        serverCallback.onServerResponse(""); // ответ в случае не правильных данных
                     }
                 }
                 @Override
                 public void onFailure(@NonNull Call<Post> call, @NonNull Throwable t) {
-                    serverCallback.onServerResponse("");
+                    serverCallback.onServerResponse(""); // ответ в случае отчутстве сети
                 }
             });
         }

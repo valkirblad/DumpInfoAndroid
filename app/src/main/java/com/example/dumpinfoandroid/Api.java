@@ -10,9 +10,13 @@ import retrofit2.http.Part;
 
 public interface Api {
 
+
+    // отправка json
     @POST("/")
     Call<Post> post(@Body Post post);
 
+
+    // отправка файлов
     @Multipart
     @POST("/")
     Call<ResponseBody> upload(@Part MultipartBody.Part file);

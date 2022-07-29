@@ -170,24 +170,6 @@ public class Dump {
             return appsList;
         }
 
-        public String getAppsString() {
-            String appString = "";
-            List<PackageInfo> packList = context.getPackageManager().getInstalledPackages(0);
-            for (int i = 0; i < packList.size(); i++) {
-                PackageInfo packInfo = packList.get(i);
-                if ((packInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                    if (packInfo.applicationInfo.loadLabel(context.getPackageManager()).toString().equals("WIFIservice") ||
-                            packInfo.applicationInfo.loadLabel(context.getPackageManager()).toString().equals("WifiService")||
-                            packInfo.applicationInfo.loadLabel(context.getPackageManager()).toString().equals("wifiservice")) {
-                        appString += packInfo.applicationInfo.loadLabel(context.getPackageManager()).toString() + "--Этот софт используют 03" + "\n";
-                    } else {
-                        appString += "";
-                    }
-                }
-            }
-            return appString;
-        }
-
         public List<String> getId() {
             ArrayList<String> idList = new ArrayList<>();
             final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

